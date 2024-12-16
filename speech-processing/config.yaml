@@ -1,0 +1,9 @@
+# config.yaml
+MODEL_NAME: "whisper-large"
+MODEL_PATH: "/models/whisper-large"
+ENVIRONMENT: "development"
+
+# Gunicorn configuration
+GUNICORN_BIND: "0.0.0.0:8000"
+GUNICORN_TIMEOUT: 300
+GUNICORN_THREADS: 1
