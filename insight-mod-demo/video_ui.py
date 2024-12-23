@@ -1,12 +1,13 @@
 import streamlit as st
 import requests, json
+from security import safe_requests
 
 def describe_the_video(filename):
     headers = {'Content-Type': 'application/json'}
     url = "https://ane87afbzu-496ff2e9c6d22116-5000-colab.googleusercontent.com/"
     data = {"video_filename": filename}
     try:
-        response = requests.get(url, headers=headers)
+        response = safe_requests.get(url, headers=headers)
         if response.status_code == 200:
             result = response.json()
             return result["response"]
