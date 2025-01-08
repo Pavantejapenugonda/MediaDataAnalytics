@@ -14,7 +14,7 @@ def hit_audio_processing_api(endpoint, audio_file_path, translate_lang_code=None
     else:
         data = {"audio_file": audio_file_path}
     try:
-        response = requests.post(url, data=json.dumps(data))
+        response = requests.post(url, data=json.dumps(data), timeout=60)
         if response.status_code == 200:
             result = response.json()
             return result[endpoint+'_text']
@@ -34,7 +34,7 @@ def summarize_the_content(result):
     url = "http://localhost:11434/api/generate"
     data = {"model": "mistral", "prompt":prompt_text, "stream":False}
     try:
-        response = requests.post(url, data=json.dumps(data))
+        response = requests.post(url, data=json.dumps(data), timeout=60)
         if response.status_code == 200:
             result = response.json()
             return result["response"]
