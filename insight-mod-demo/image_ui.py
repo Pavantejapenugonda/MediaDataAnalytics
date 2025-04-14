@@ -14,7 +14,7 @@ def summarize_the_image(base64_images):
     url = "http://localhost:11434/api/generate"
     data = {"model": "llava", "prompt":prompt_text, "stream":False, "images": [base64_images]}
     try:
-        response = requests.post(url, headers=headers, data=json.dumps(data))
+        response = requests.post(url, headers=headers, data=json.dumps(data), timeout=60)
         if response.status_code == 200:
             result = response.json()
             return result["response"]
