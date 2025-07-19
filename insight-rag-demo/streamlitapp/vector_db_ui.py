@@ -16,7 +16,7 @@ def create_vectordb():
                 for idx, uploaded_file in enumerate(uploaded_files):
                     print(uploaded_file)
                     files = {"files": (uploaded_file.name, uploaded_file.getvalue(), "application/pdf")}
-                    response = requests.post(UPLOAD_API + "upload_pdfs/", files=files)
+                    response = requests.post(UPLOAD_API + "upload_pdfs/", files=files, timeout=60)
 
                     if response.status_code == 200:
                         col2.success(f"{uploaded_file.name} uploaded successfully!")
@@ -29,7 +29,7 @@ def create_vectordb():
             col2.success("All files uploaded!")
     elif col2.button("Reset"):
         with st.spinner("Reseting DB..."):
-            response = requests.post(UPLOAD_API + "reset_database/")
+            response = requests.post(UPLOAD_API + "reset_database/", timeout=60)
             if response.status_code == 200:
                 st.success(f"Sucessfully reseted the DB.")
             else:

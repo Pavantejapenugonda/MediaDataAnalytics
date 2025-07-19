@@ -11,7 +11,7 @@ def fetch_results_from_api(query_api, user_query, top_k=0):
         if top_k:
             json_query['top_k'] = top_k
         
-        response = requests.post(query_api, json=json_query, headers= headers)
+        response = requests.post(query_api, json=json_query, headers= headers, timeout=60)
         if response.status_code == 200:
             # Parse the JSON response to get the data
             data = response.json()
@@ -47,7 +47,7 @@ def query_rag():
     if st.button("Submit Query"):
         if user_query:
             # Make a POST request to the RAG API
-            response = requests.post(QUERY_RAG_API+"query_rag/", json={"query_text": user_query, "top_k":k})
+            response = requests.post(QUERY_RAG_API+"query_rag/", json={"query_text": user_query, "top_k":k}, timeout=60)
 
             if response.status_code == 200:
                 response_data = response.json()

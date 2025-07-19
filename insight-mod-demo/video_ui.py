@@ -6,7 +6,7 @@ def describe_the_video(filename):
     url = "https://ane87afbzu-496ff2e9c6d22116-5000-colab.googleusercontent.com/"
     data = {"video_filename": filename}
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, timeout=60)
         if response.status_code == 200:
             result = response.json()
             return result["response"]
